@@ -66,12 +66,22 @@ const toggleFullLines = () => {
         </button>
       </div>
       <!-- Show the rest of the plan details -->
-       <!-- API returns -1 as representation of unlimited -->
-      <div class="mb-2">Data: {{ plan.data === -1 ? 'unlimited' : plan.data + ' GB' }}</div>
-      <div class="mb-2">Hotspot: {{ plan.hotspot === -1 ? 'unlimited' : plan.hotspot + ' GB' }}</div>
-      <div class="mb-2">Talk: {{ plan.talk === -1 ? 'unlimited' : plan.talk + ' minutes' }}</div>
-      <div class="mb-2">Text: {{ plan.text === -1 ? 'unlimited' : plan.text + ' messages' }}</div>
-      <div class="mb-4">Payoff: {{ plan.payoff ? 'Yes' : 'No' }}</div>
+       <!-- API returns -1 as representation -->
+      <div class="mb-2">
+        <strong>Data:</strong> {{ plan.data === -1 ? 'unlimited' : plan.data + ' GB' }}
+      </div>
+      <div class="mb-2">
+        <strong>Hotspot:</strong> {{ plan.hotspot === -1 ? 'unlimited' : plan.hotspot + ' GB' }}
+      </div>
+      <div class="mb-2">
+        <strong>Talk:</strong> {{ plan.talk === -1 ? 'unlimited' : plan.talk + ' minutes' }}
+      </div>
+      <div class="mb-2">
+        <strong>Text:</strong> {{ plan.text === -1 ? 'unlimited' : plan.text + ' messages' }}
+      </div>
+      <div class="mb-4">
+        <strong>Payoff:</strong> {{ plan.payoff ? 'Yes' : 'No' }}
+      </div>
     </div>
   </div>
 </template>

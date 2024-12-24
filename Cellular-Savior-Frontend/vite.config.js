@@ -11,7 +11,7 @@ export default defineConfig({
     vueDevTools(),
   ],
   server: {
-    port: 3000,
+    port: 5000,
     proxy: {
       '/api': {
         target: 'http://localhost:8080/api',
