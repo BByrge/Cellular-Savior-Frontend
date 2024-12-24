@@ -3,14 +3,15 @@
 </script>
 
 <template>
-  <div>
-    <h1 class="text-xl font-bold mb-4">Login View</h1>
-    <button
-        class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:ring-2 focus:ring-purple-400"
-        type="submit"
-        aria-label="Login"
-    >
-        Login
-    </button>
-  </div>
+    <div class="flex items-center justify-center bg-gray-100">
+        <div class="bg-white p-8 rounded shadow-md max-w-sm w-full">
+            <button
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                type="submit"
+                aria-label="Login"
+            >
+                Login
+            </button>
+        </div>
+    </div>
 </template>

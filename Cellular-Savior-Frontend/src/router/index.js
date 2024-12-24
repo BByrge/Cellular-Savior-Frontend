@@ -41,7 +41,7 @@ const router = createRouter({
         }
 
         try {
-          // Send the `code` and `state` to the backend for token exchange
+          // Send the code and state to the backend for token exchange
           const response = await axios.post(`${backendApiBaseUrl}/auth/callback`, {
             code,
             state,

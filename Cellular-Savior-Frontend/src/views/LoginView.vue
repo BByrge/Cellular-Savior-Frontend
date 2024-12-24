@@ -17,7 +17,6 @@ const login = () => {
 
 <template>
   <div>
-    <h1>Login View</h1>
     <LoginButton @click="login" />
   </div>
 </template>
