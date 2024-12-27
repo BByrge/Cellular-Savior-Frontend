@@ -54,49 +54,119 @@ const handleSubmit = async () => {
                     <h3 class="text-xl text-center mb-6">Enter your current or desired plan, 
                       and we'll suggest better options.</h3>
 
+                        <!-- # of lines -->
                     <div class="mb-4">
                         <label for="lines" class="block text-gray-700 font-bold mb-2">Lines</label>
-                        <input v-model="form.lines" type="number" id="lines" name="lines" class="border rounded w-full py-2 px-3" required />
+                        <select v-model="form.lines" id="lines" name="lines" class="border rounded w-full py-2 px-3" required>
+                            <option v-for="number in 12" :key="number" :value="number">{{ number }}</option>
+                        </select>
                     </div>
-
+                    
+                    <!-- Data -->
                     <div class="mb-4">
                         <label for="data" class="block text-gray-700 font-bold mb-2">Data</label>
-                        <input v-model="form.data" type="number" id="data" name="data" class="border rounded w-full py-2 px-3" />
+                        <select v-model="form.data" id="data" name="data" class="border rounded w-full py-2 px-3">
+                            <option value="0">0</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="-1">Unlimited</option>
+                        </select>
                     </div>
 
+                    <!-- Hotspot -->
                     <div class="mb-4">
                         <label for="hotspot" class="block text-gray-700 font-bold mb-2">Hotspot</label>
-                        <input v-model="form.hotspot" type="number" id="hotspot" name="hotspot" class="border rounded w-full py-2 px-3" />
+                        <select v-model="form.hotspot" id="hotspot" name="hotspot" class="border rounded w-full py-2 px-3">
+                            <option value="0">0</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="-1">Unlimited</option>
+                        </select>
                     </div>
 
+                    <!-- Talk -->
                     <div class="mb-4">
                         <label for="talk" class="block text-gray-700 font-bold mb-2">Talk</label>
-                        <input v-model="form.talk" type="number" id="talk" name="talk" class="border rounded w-full py-2 px-3" />
+                        <select v-model="form.talk" id="talk" name="talk" class="border rounded w-full py-2 px-3">
+                            <option value="0">0</option>
+                            <option value="50">50</option>
+                            <option value="200">200</option>
+                            <option value="500">500</option>
+                            <option value="1000">1000</option>
+                            <option value="-1">Unlimited</option>
+                        </select>
                     </div>
 
+                    <!-- Text -->
                     <div class="mb-4">
                         <label for="text" class="block text-gray-700 font-bold mb-2">Text</label>
-                        <input v-model="form.text" type="number" id="text" name="text" class="border rounded w-full py-2 px-3" />
+                        <select v-model="form.text" id="text" name="text" class="border rounded w-full py-2 px-3">
+                            <option value="0">0</option>
+                            <option value="50">50</option>
+                            <option value="200">200</option>
+                            <option value="500">500</option>
+                            <option value="1000">1000</option>
+                            <option value="-1">Unlimited</option>
+                        </select>
                     </div>
 
+                    <!-- Price -->
                     <div class="mb-4">
                         <label for="price" class="block text-gray-700 font-bold mb-2">Price</label>
-                        <input v-model="form.price" type="number" step="0.01" id="price" name="price" class="border rounded w-full py-2 px-3" />
+                        <input v-model="form.price" type="number" step="10" id="price" name="price" class="border rounded w-full py-2 px-3" />
                     </div>
 
+                        <!-- Financing Status -->
                     <div class="mb-4">
                         <label for="financing_status" class="block text-gray-700 font-bold mb-2">Financing Status</label>
                         <input v-model="form.financing_status" type="checkbox" id="financing_status" name="financing_status" class="border rounded py-2 px-3" />
                     </div>
-
+                    
+                    <!-- Carriers -->
                     <div class="mb-4">
-                        <label for="carriers" class="block text-gray-700 font-bold mb-2">Carriers</label>
-                        <input v-model="form.carriers" type="text" id="carriers" name="carriers" class="border rounded w-full py-2 px-3" placeholder="Comma separated list of carriers" />
+                        <label class="block text-gray-700 font-bold mb-2">
+                            Networks (MNO)
+                            <sup class="text-blue-500 ml-1 cursor-pointer relative group">
+                                ?
+                                <span
+                                    class="absolute hidden group-hover:block bg-white border border-gray-300 text-gray-700 text-sm px-2 py-1 rounded mt-2 w-96"
+                                >
+                                    MVNOs (TracFone, Mint, Google Fi, etc.) using these networks will also be included in results.
+                                </span>
+                            </sup>
+                        </label>
+
+                        <div>
+                            <label class="inline-flex items-center mr-4">
+                                <input type="checkbox" name="carriers" value="Verizon" v-model="form.carriers" class="rounded">
+                                <span class="ml-2">Verizon</span>
+                            </label>
+                            <label class="inline-flex items-center mr-4">
+                                <input type="checkbox" name="carriers" value="T-Mobile" v-model="form.carriers" class="rounded">
+                                <span class="ml-2">T-Mobile</span>
+                            </label>
+                            <label class="inline-flex items-center mr-4">
+                                <input type="checkbox" name="carriers" value="AT&T" v-model="form.carriers" class="rounded">
+                                <span class="ml-2">AT&T</span>
+                            </label>
+                            <label class="inline-flex items-center mr-4">
+                                <input type="checkbox" name="carriers" value="USCellular" v-model="form.carriers" class="rounded">
+                                <span class="ml-2">USCellular</span>
+                            </label>
+                            <label class="inline-flex items-center mr-4">
+                                <input type="checkbox" name="carriers" value="Boost Mobile" v-model="form.carriers" class="rounded">
+                                <span class="ml-2">Boost Mobile</span>
+                            </label>
+                        </div>
                     </div>
 
                     <div>
                         <button class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline" type="submit">
-                            Add Plan
+                           Recommend Plans 
                         </button>
                     </div>
                 </form>
