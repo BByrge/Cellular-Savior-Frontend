@@ -4,6 +4,7 @@ import NotFoundView from '@/views/NotFoundView.vue';
 import PlansView from '@/views/PlansView.vue';
 import LoginView from '@/views/LoginView.vue';
 import axios from 'axios';
+import AdminView from '../views/AdminView.vue';
 
 const backendApiBaseUrl = 'http://localhost:8080/api';
 
@@ -26,6 +27,12 @@ const router = createRouter({
       component: LoginView,
     },
 
+    {
+      path: '/admin',
+      name: 'admin',
+      component: AdminView
+    },
+    
     // OAuth callback route. This logic is implemented here because UI is not necessary.
     {
       path: '/auth/callback',

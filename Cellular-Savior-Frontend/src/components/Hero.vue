@@ -4,11 +4,11 @@ import { defineProps } from 'vue';
 defineProps({
     title: {
         type: String,
-        default: "Keep your money. Billion dollar corporations don't need it."
+        default: "Keep your money."
     },
     subtitle: {
         type: String,
-        default: "Save money on your phone bill with Cellular Savior."
+        default: "Billion dollar corporations don't need it."
     },
 })
 </script>
