@@ -51,7 +51,7 @@ onMounted(() => {
   checkUser();
 });
 
-// Watch for route changes and 
+// Watch for route changes and check user
 watch(route, checkUser);
 </script>
 

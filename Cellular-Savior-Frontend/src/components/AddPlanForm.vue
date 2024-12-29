@@ -1,6 +1,6 @@
 <script setup>
 import { useToast } from 'vue-toastification';
-import { reactive } from 'vue';
+import { reactive, watch } from 'vue';
 import axios from 'axios';
 
 const form = reactive({
@@ -10,10 +10,11 @@ const form = reactive({
     talk : '10000',
     text : '10000',
     hotspot : '0',
-    // The key must be a string for json. This is admin only so the complicated formatting is not an issue.
-    price : '{"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0}',
+    // The key must be a string for json. The value is a string for consistency.
+    price : '{"1": "0", "2": "0", "3": "0", "4": "0", "5": "0", "6": "0", "7": "0", "8": "0", "9": "0", "10": "0", "11": "0", "12": "0"}',
     payoff_deal : false,
     mvno : false,
+    networks : '[" "]',
     prepaid : false,
     tax_inclusive : false,
     description : '',
@@ -33,6 +34,7 @@ const handleSubmit = async () => {
         price: form.price,
         payoff_deal: form.payoff_deal,
         mvno: form.mvno,
+        networks: form.networks,
         prepaid: form.prepaid,
         tax_inclusive: form.tax_inclusive,
         description: form.description,
@@ -46,6 +48,13 @@ const handleSubmit = async () => {
                 'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
             },
         }; 
+        // Parse the price data into JSON from string before sending.
+        let priceData = JSON.parse(form.price);
+        if (!form.mvno) {
+            form.networks = [form.carrier];
+        } else {
+            form.networks = JSON.parse(form.networks);
+        }
         let data = {
             carrier: form.carrier,
             name: form.name,
@@ -53,9 +62,10 @@ const handleSubmit = async () => {
             talk: form.talk,
             text: form.text,
             hotspot: form.hotspot,
-            price: form.price,
+            price: priceData,
             payoff_deal: form.payoff_deal,
             mvno: form.mvno,
+            networks: form.networks,
             prepaid: form.prepaid,
             tax_inclusive: form.tax_inclusive,
             description: form.description,
@@ -73,6 +83,7 @@ const handleSubmit = async () => {
         form.price = '{"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0}';
         form.payoff_deal = false;
         form.mvno = false;
+        form.networks = [];
         form.prepaid = false;
         form.tax_inclusive = false;
         form.description = '';
@@ -82,6 +93,7 @@ const handleSubmit = async () => {
         toast.error('Plan Not Created -- Error')
     }
 };
+
 </script>
 
 <template>
@@ -148,6 +160,14 @@ const handleSubmit = async () => {
                         <label for="mvno" class="block text-gray-700 font-bold mb-2">MVNO</label>
                         <input v-model="form.mvno" type="checkbox" id="mvno" name="mvno" class="border rounded py-2 px-3 hover:outline hover:outline-1" />
                     </div>
+
+                    <!-- Networks -->
+                    <div v-if="form.mvno" class="mb-4">
+                        <label for="networks" class="block text-gray-700 font-bold mb-2">Networks (All networks the MVNO uses)</label>
+                        <input v-model="form.networks" id="networks" name="networks" class="border rounded w-full py-2 px-3 hover:outline hover:outline-1" placeholder="[]" required>
+                    </div>
+
+
 
                     <!-- Prepaid -->
                     <div class="mb-4">
