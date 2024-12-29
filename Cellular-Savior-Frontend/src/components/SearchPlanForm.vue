@@ -1,23 +1,24 @@
 <!-- This is not finised and is quite broken-->
 
 <script setup>
-import router from '@/router';
 import { useToast } from 'vue-toastification';
 import { reactive } from 'vue';
 import axios from 'axios';
 
+const toast = useToast();
+const MNOs = ['Verizon', 'T-Mobile', 'AT&T', 'USCellular', 'Boost Mobile'];
+
 const form = reactive({
-    lines: '',
-    data: '',
-    hotspot: '',
-    talk: '',
-    text: '',
-    price: '',
+    lines: '1',
+    data: '10000',
+    hotspot: '0',
+    talk: '10000',
+    text: '10000',
+    //price: '',
     financing_status: false,
-    carriers: [],
+    carriers: MNOs,
 });
 
-const toast = useToast();
 
 // This captures the form submission in plan
 const handleSubmit = async () => {
@@ -27,7 +28,7 @@ const handleSubmit = async () => {
         hotspot: form.hotspot,
         talk: form.talk,
         text: form.text,
-        price: form.price,
+        //price: form.price,
         financing_status: form.financing_status,
         carriers: form.carriers,
     };
@@ -68,7 +69,7 @@ const handleSubmit = async () => {
                         <!-- # of lines -->
                     <div class="mb-4">
                         <label for="lines" class="block text-gray-700 font-bold mb-2">Lines</label>
-                        <select v-model="form.lines" id="lines" name="lines" class="border rounded w-full py-2 px-3" required>
+                        <select v-model="form.lines" id="lines" name="lines" class="border rounded w-full py-2 px-3 hover:outline hover:outline-1" required>
                             <option v-for="number in 12" :key="number" :value="number">{{ number }}</option>
                         </select>
                     </div>
@@ -76,52 +77,52 @@ const handleSubmit = async () => {
                     <!-- Data -->
                     <div class="mb-4">
                         <label for="data" class="block text-gray-700 font-bold mb-2">Data</label>
-                        <select v-model="form.data" id="data" name="data" class="border rounded w-full py-2 px-3">
+                        <select v-model="form.data" id="data" name="data" class="border rounded w-full py-2 px-3 hover:outline hover:outline-1">
                             <option value="0">0</option>
                             <option value="5">5</option>
                             <option value="10">10</option>
                             <option value="20">20</option>
                             <option value="50">50</option>
-                            <option value="-1">Unlimited</option>
+                            <option value="10000">Unlimited</option>
                         </select>
                     </div>
 
                     <!-- Hotspot -->
                     <div class="mb-4">
                         <label for="hotspot" class="block text-gray-700 font-bold mb-2">Hotspot</label>
-                        <select v-model="form.hotspot" id="hotspot" name="hotspot" class="border rounded w-full py-2 px-3">
+                        <select v-model="form.hotspot" id="hotspot" name="hotspot" class="border rounded w-full py-2 px-3 hover:outline hover:outline-1">
                             <option value="0">0</option>
                             <option value="5">5</option>
                             <option value="10">10</option>
                             <option value="20">20</option>
                             <option value="50">50</option>
-                            <option value="-1">Unlimited</option>
+                            <option value="10000">Unlimited</option>
                         </select>
                     </div>
 
                     <!-- Talk -->
                     <div class="mb-4">
                         <label for="talk" class="block text-gray-700 font-bold mb-2">Talk</label>
-                        <select v-model="form.talk" id="talk" name="talk" class="border rounded w-full py-2 px-3">
+                        <select v-model="form.talk" id="talk" name="talk" class="border rounded w-full py-2 px-3 hover:outline hover:outline-1">
                             <option value="0">0</option>
                             <option value="50">50</option>
                             <option value="200">200</option>
                             <option value="500">500</option>
                             <option value="1000">1000</option>
-                            <option value="-1">Unlimited</option>
+                            <option value="10000">Unlimited</option>
                         </select>
                     </div>
 
                     <!-- Text -->
                     <div class="mb-4">
                         <label for="text" class="block text-gray-700 font-bold mb-2">Text</label>
-                        <select v-model="form.text" id="text" name="text" class="border rounded w-full py-2 px-3">
+                        <select v-model="form.text" id="text" name="text" class="border rounded w-full py-2 px-3 hover:outline hover:outline-1 ">
                             <option value="0">0</option>
                             <option value="50">50</option>
                             <option value="200">200</option>
                             <option value="500">500</option>
                             <option value="1000">1000</option>
-                            <option value="-1">Unlimited</option>
+                            <option value="10000">Unlimited</option>
                         </select>
                     </div>
 
@@ -153,26 +154,10 @@ const handleSubmit = async () => {
                             </sup>
                         </label>
 
-                        <div>
-                            <label class="inline-flex items-center mr-4">
-                                <input type="checkbox" name="carriers" value="Verizon" v-model="form.carriers" class="rounded">
-                                <span class="ml-2">Verizon</span>
-                            </label>
-                            <label class="inline-flex items-center mr-4">
-                                <input type="checkbox" name="carriers" value="T-Mobile" v-model="form.carriers" class="rounded">
-                                <span class="ml-2">T-Mobile</span>
-                            </label>
-                            <label class="inline-flex items-center mr-4">
-                                <input type="checkbox" name="carriers" value="AT&T" v-model="form.carriers" class="rounded">
-                                <span class="ml-2">AT&T</span>
-                            </label>
-                            <label class="inline-flex items-center mr-4">
-                                <input type="checkbox" name="carriers" value="USCellular" v-model="form.carriers" class="rounded">
-                                <span class="ml-2">USCellular</span>
-                            </label>
-                            <label class="inline-flex items-center mr-4">
-                                <input type="checkbox" name="carriers" value="Boost Mobile" v-model="form.carriers" class="rounded">
-                                <span class="ml-2">Boost Mobile</span>
+                        <div class="mb-6">
+                            <label v-for="mno in MNOs" :key="mno" class="inline-flex items-center mr-4">
+                                <input type="checkbox" :value="mno" v-model="form.carriers" class="rounded">
+                                <span class="ml-2">{{ mno }}</span>
                             </label>
                         </div>
                     </div>

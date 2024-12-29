@@ -1,12 +1,58 @@
 <script setup>
-import { RouterLink, useRoute } from 'vue-router';
+import { RouterLink, useRoute, useRouter } from 'vue-router';
 import logo from '@/assets/CellularSaviorLogoTransparent.png';
+import axios from 'axios';
+import { onMounted, watch, ref } from 'vue';
+import { jwtDecode } from 'jwt-decode';
+
+let user = ref(null);
+const route = useRoute();
 
 const isActiveLink = (routePath) => {
   const route = useRoute();
   return route.path === routePath;
 };
 
+
+const isValidJWT = async (token) => {
+  if (!token) {
+    return false;
+  }
+  try {
+    const response = await axios.post('/api/auth/verifyjwt', {
+      token,
+    });
+    return true;
+  } catch (error) {
+    console.error('Error verifying JWT', error);
+    // Remove invalid token
+    localStorage.removeItem('authToken');
+    return false;
+  }
+
+};
+
+const getUser = async () => {
+  const token = localStorage.getItem('authToken');
+  let valid = await isValidJWT(token);
+  if (!valid) {
+    return null;
+  }
+  let jwtDecoded = jwtDecode(token);
+  return jwtDecoded;
+};
+
+const checkUser = async () => {
+  user.value = await getUser();
+  user.roles = user.value ? user.value.roles : [];
+};
+
+onMounted(() => {
+  checkUser();
+});
+
+// Watch for route changes and 
+watch(route, checkUser);
 </script>
 
 <template>
@@ -52,6 +98,7 @@ const isActiveLink = (routePath) => {
                   >Plans</RouterLink >
 
                 <RouterLink 
+                  v-if="!user"
                   to="/login"
                   :class="[isActiveLink('/login') 
                   ? 'bg-pink-900' 
@@ -64,6 +111,7 @@ const isActiveLink = (routePath) => {
                   >Login</RouterLink>
 
                 <RouterLink
+                  v-if="user && user.roles.includes('admin')"
                   to="/admin"
                   :class="[isActiveLink('/admin') 
                   ? 'bg-pink-900' 
@@ -74,6 +122,19 @@ const isActiveLink = (routePath) => {
                   'rounded-md'
                   ]"
                   >Admin</RouterLink>
+
+                <RouterLink
+                  v-if="user"
+                  to="/logout"
+                  :class="[isActiveLink('/profile') 
+                  ? 'bg-pink-900' 
+                  : 'hover:bg-gray-900 hover:text-white',
+                  'text-white', 
+                  'px-3', 
+                  'py-2', 
+                  'rounded-md'
+                  ]"
+                  >Logout</RouterLink>
               </div>
             </div>
           </div>

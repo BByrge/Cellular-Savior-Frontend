@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '@/views/HomeView.vue';
 import NotFoundView from '@/views/NotFoundView.vue';
 import PlansView from '@/views/PlansView.vue';
-import LoginView from '@/views/LoginView.vue';
 import axios from 'axios';
 import AdminView from '../views/AdminView.vue';
 
@@ -24,7 +23,23 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: LoginView,
+      beforeEnter: async (to, from, next) => {
+        // Check if the user is already logged in
+        if (localStorage.getItem('authToken')) {
+          // Redirect to home if the user is already logged in
+          next('/');
+        } else {
+          // Proceed to login if the user is not logged in
+          try {
+            let response = await axios.get(`${backendApiBaseUrl}/auth/initiate`);
+            let url = response.data.url;
+            window.location.href = url;
+          } catch (error) {
+            console.error('Error during login initiation:', error);
+            next('/login'); // Redirect to login on error
+          }
+        }
+      }
     },
 
     {
@@ -32,7 +47,17 @@ const router = createRouter({
       name: 'admin',
       component: AdminView
     },
-    
+    {
+      path: '/logout',
+      name: 'logout',
+      beforeEnter: (to, from, next) => {
+        // Remove the JWT from local storage
+        localStorage.removeItem('authToken');
+        // Redirect to home
+        next('/login');
+      },
+    },
+
     // OAuth callback route. This logic is implemented here because UI is not necessary.
     {
       path: '/auth/callback',
