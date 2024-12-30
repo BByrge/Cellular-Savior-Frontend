@@ -36,7 +36,9 @@ const toggleFullLines = () => {
     <div class="p-4">
       <div class="mb-6">
         <div class="text-gray-600 my-2">{{ plan.carrier }}</div>
-        <h3 class="text-xl font-bold">{{ plan.name }}</h3>
+        <h3 class="text-xl text-pink-400 underline underline-offset-4 font-bold">
+          <a :href="`/plan/${plan.id}`">{{ plan.name }}</a>
+        </h3>
       </div>
       <!-- Show the description of the plan -->
       <div class="mb-3">
@@ -66,18 +68,18 @@ const toggleFullLines = () => {
         </button>
       </div>
       <!-- Show the rest of the plan details -->
-       <!-- API returns -1 as representation -->
+       <!-- API returns 10000 as representation -->
       <div class="mb-2">
-        <strong>Data:</strong> {{ plan.data === -1 ? 'unlimited' : plan.data + ' GB' }}
+        <strong>Data:</strong> {{ plan.data === 10000 ? 'Unlimited' : plan.data + ' GB' }}
       </div>
       <div class="mb-2">
-        <strong>Hotspot:</strong> {{ plan.hotspot === -1 ? 'unlimited' : plan.hotspot + ' GB' }}
+        <strong>Hotspot:</strong> {{ plan.hotspot === 10000 ? 'Unlimited' : plan.hotspot + ' GB' }}
       </div>
       <div class="mb-2">
-        <strong>Talk:</strong> {{ plan.talk === -1 ? 'unlimited' : plan.talk + ' minutes' }}
+        <strong>Talk:</strong> {{ plan.talk === 10000 ? 'Unlimited' : plan.talk + ' minutes' }}
       </div>
       <div class="mb-2">
-        <strong>Text:</strong> {{ plan.text === -1 ? 'unlimited' : plan.text + ' messages' }}
+        <strong>Text:</strong> {{ plan.text === 10000 ? 'Unlimited' : plan.text + ' messages' }}
       </div>
       <div class="mb-4">
         <strong>Payoff:</strong> {{ plan.payoff ? 'Yes' : 'No' }}

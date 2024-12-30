@@ -9,6 +9,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 const app = createApp(App);
+// Globals
 app.use(router);
 app.use(Toast);
 app.mount('#app');

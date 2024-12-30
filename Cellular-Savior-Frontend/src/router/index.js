@@ -2,10 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '@/views/HomeView.vue';
 import NotFoundView from '@/views/NotFoundView.vue';
 import PlansView from '@/views/PlansView.vue';
+import PlanView from '@/views/PlanView.vue';
 import axios from 'axios';
 import AdminView from '../views/AdminView.vue';
 
-const backendApiBaseUrl = 'http://localhost:8080/api';
+const backendApiBaseUrl = import.meta.env.VITE_BACKEND_API_BASE_URL;
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +20,11 @@ const router = createRouter({
       path: '/plans',
       name: 'plans',
       component: PlansView,
+    },
+    {
+      path: '/plan/:id',
+      name: 'plan',
+      component: PlanView,
     },
     {
       path: '/login',
@@ -53,8 +59,10 @@ const router = createRouter({
       beforeEnter: (to, from, next) => {
         // Remove the JWT from local storage
         localStorage.removeItem('authToken');
+        // Refresh the page to clear the user state
+        window.location.reload();
         // Redirect to home
-        next('/login');
+        next('/');
       },
     },
 

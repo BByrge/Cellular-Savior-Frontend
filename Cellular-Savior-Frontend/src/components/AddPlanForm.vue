@@ -3,6 +3,10 @@ import { useToast } from 'vue-toastification';
 import { reactive, watch } from 'vue';
 import axios from 'axios';
 
+
+const toast = useToast();
+
+
 const form = reactive({
     carrier : '',
     name : '',
@@ -18,9 +22,8 @@ const form = reactive({
     prepaid : false,
     tax_inclusive : false,
     description : '',
+    url : '',
 });
-
-const toast = useToast();
 
 // This captures the form submission in plan
 const handleSubmit = async () => {
@@ -38,6 +41,7 @@ const handleSubmit = async () => {
         prepaid: form.prepaid,
         tax_inclusive: form.tax_inclusive,
         description: form.description,
+        url: form.url,
     };
 
       // Try to create plan
@@ -69,6 +73,7 @@ const handleSubmit = async () => {
             prepaid: form.prepaid,
             tax_inclusive: form.tax_inclusive,
             description: form.description,
+            url: form.url,
         };
         const response = await axios.post('/api/plans', data, config);
         const createdPlan = response.data;
@@ -87,6 +92,7 @@ const handleSubmit = async () => {
         form.prepaid = false;
         form.tax_inclusive = false;
         form.description = '';
+        form.url = '';
         toast.success('Plan Created Successfully');
     } catch (error) {
         console.error('Error Creating plan', error);
@@ -185,6 +191,12 @@ const handleSubmit = async () => {
                     <div class="mb-4">
                         <label for="description" class="block text-gray-700 font-bold mb-2">Description</label>
                         <textarea v-model="form.description" id="description" name="description" class="border rounded w-full py-2 px-3 hover:outline hover:outline-1" required></textarea>
+                    </div>
+
+                    <!-- url -->
+                    <div class="mb-4">
+                        <label for="url" class="block text-gray-700 font-bold mb-2">URL</label>
+                        <input v-model="form.url" id="url" name="url" class="border rounded w-full py-2 px-3 hover:outline hover:outline-1" required>
                     </div>
 
                     <!-- Submit Button -->
