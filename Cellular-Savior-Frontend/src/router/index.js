@@ -6,8 +6,6 @@ import PlanView from '@/views/PlanView.vue';
 import axios from 'axios';
 import AdminView from '../views/AdminView.vue';
 
-const backendApiBaseUrl = import.meta.env.VITE_BACKEND_API_BASE_URL;
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -37,7 +35,7 @@ const router = createRouter({
         } else {
           // Proceed to login if the user is not logged in
           try {
-            let response = await axios.get(`${backendApiBaseUrl}/auth/initiate`);
+            let response = await axios.get('http://localhost:8080/api/auth/initiate');
             let url = response.data.url;
             window.location.href = url;
           } catch (error) {
@@ -82,7 +80,7 @@ const router = createRouter({
 
         try {
           // Send the code and state to the backend for token exchange
-          const response = await axios.post(`${backendApiBaseUrl}/auth/callback`, {
+          const response = await axios.post('http://localhost:8080/api/auth/callback', {
             code,
             state,
           });

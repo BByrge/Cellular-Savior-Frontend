@@ -4,9 +4,11 @@ import logo from '@/assets/CellularSaviorLogoTransparent.png';
 import axios from 'axios';
 import { onMounted, watch, ref } from 'vue';
 import { jwtDecode } from 'jwt-decode';
+import { useStore } from '@/stores/store.js';
 
 let user = ref(null);
 const route = useRoute();
+const store = useStore();
 
 const isActiveLink = (routePath) => {
   const route = useRoute();
@@ -19,7 +21,7 @@ const isValidJWT = async (token) => {
     return false;
   }
   try {
-    const response = await axios.post('/api/auth/verifyjwt', {
+    const response = await axios.post('api/auth/verifyjwt', {
       token,
     });
     return true;
@@ -126,7 +128,7 @@ watch(route, checkUser);
                 <RouterLink
                   v-if="user"
                   to="/logout"
-                  :class="[isActiveLink('/profile') 
+                  :class="[isActiveLink('/logout') 
                   ? 'bg-pink-900' 
                   : 'hover:bg-gray-900 hover:text-white',
                   'text-white', 
