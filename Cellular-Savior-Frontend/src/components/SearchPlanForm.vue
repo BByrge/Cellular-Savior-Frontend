@@ -33,11 +33,10 @@ const handleSubmit = async () => {
         carriers: form.carriers,
     };
 
-      // Try to get recommended plans
+      // Store form data in local storage and redirect to /recommend
     try {
-        const response = await axios.post('/api/recommend', plan);
-        const recommendedPlans = response.data;
-        console.log('Recommended Plans:', recommendedPlans);
+        localStorage.setItem('plan', JSON.stringify(plan));
+        window.location.href = '/recommend';
     } catch (error) {
         console.error('Error recommending plan', error);
         toast.error('Plan Not Recommended -- Error')

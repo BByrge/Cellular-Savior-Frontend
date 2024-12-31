@@ -4,11 +4,10 @@ import logo from '@/assets/CellularSaviorLogoTransparent.png';
 import axios from 'axios';
 import { onMounted, watch, ref } from 'vue';
 import { jwtDecode } from 'jwt-decode';
-import { useStore } from '@/stores/store.js';
+
 
 let user = ref(null);
 const route = useRoute();
-const store = useStore();
 
 const isActiveLink = (routePath) => {
   const route = useRoute();
