@@ -4,11 +4,8 @@ import { useRoute, RouterLink, useRouter } from 'vue-router';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import axios from 'axios';
 import BackButton from '@/components/BackButton.vue';
-import { useToast } from 'vue-toastification';
 
 const route = useRoute();
-const router = useRouter();
-const toast = useToast();
 
 const planId = route.params.id;
 
@@ -16,7 +13,6 @@ const state = reactive({
   plan: {},
   isLoading: true,
 });
-
 
 onMounted(async () => {
   try {

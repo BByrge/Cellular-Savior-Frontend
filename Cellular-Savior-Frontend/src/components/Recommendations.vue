@@ -22,8 +22,11 @@ defineProps({
 
 onMounted(async () => {
     try {
-        const response = await axios.get('/api/plans');
-        state.plans = response.data;
+        let plan = JSON.parse(localStorage.getItem('plan'));
+        console.log(plan);
+        const response = await axios.post('/api/recommend', plan);
+        state.plans = response.data.results;
+        console.log(state.plans);
     } catch (error) {
         console.error('Error fetching plans', error);
     } finally {
@@ -38,7 +41,7 @@ onMounted(async () => {
     <section class="bg-blue-50 px-4 py-10">
         <div class="container-xl lg:container m-auto">
             <h2 class="text-3xl font-bold text-indigo-900 mb-6 text-center">
-                Browse plans
+                Recommended Plans
             </h2>
             <!-- Show Loading spinner while loading is true -->
             <div v-if="state.isLoading" class="text-center text-gray-500 py-6">

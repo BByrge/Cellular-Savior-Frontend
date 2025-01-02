@@ -5,6 +5,7 @@ import PlansView from '@/views/PlansView.vue';
 import PlanView from '@/views/PlanView.vue';
 import axios from 'axios';
 import AdminView from '../views/AdminView.vue';
+import RecommendView from '../views/RecommendView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,6 +14,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+    },
+    {
+      path: '/recommend',
+      name: 'recommend',
+      component: RecommendView,
     },
     {
       path: '/plans',

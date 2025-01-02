@@ -32,11 +32,11 @@ const toggleFullLines = () => {
 
 <template>
   <!-- Box -->
-  <div class="bg-white rounded-xl shadow-md relative">
+  <div class="bg-indigo-200 rounded-xl shadow-md relative">
     <div class="p-4">
       <div class="mb-6">
-        <div class="text-gray-600 my-2">{{ plan.carrier }}</div>
-        <h3 class="text-xl text-pink-400 underline underline-offset-4 font-bold">
+        <div class="my-2">{{ plan.carrier }}</div>
+        <h3 class="text-2xl text-pink-400 font-bold">
           <a :href="`/plan/${plan.id}`">{{ plan.name }}</a>
         </h3>
       </div>
