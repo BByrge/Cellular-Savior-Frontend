@@ -6,6 +6,7 @@ import PlanView from '@/views/PlanView.vue';
 import axios from 'axios';
 import AdminView from '../views/AdminView.vue';
 import RecommendView from '../views/RecommendView.vue';
+import ArticlesView from '../views/ArticlesView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,6 +32,16 @@ const router = createRouter({
       component: PlanView,
     },
     {
+      path: '/admin',
+      name: 'admin',
+      component: AdminView
+    },
+    {
+      path: '/articles',
+      name: 'articles',
+      component: ArticlesView
+    },
+    {
       path: '/login',
       name: 'login',
       beforeEnter: async (to, from, next) => {
@@ -50,12 +61,6 @@ const router = createRouter({
           }
         }
       }
-    },
-
-    {
-      path: '/admin',
-      name: 'admin',
-      component: AdminView
     },
     {
       path: '/logout',

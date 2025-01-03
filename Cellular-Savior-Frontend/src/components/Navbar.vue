@@ -98,6 +98,18 @@ watch(route, checkUser);
                   ]"
                   >Plans</RouterLink >
 
+                <RouterLink
+                  to="/articles"
+                  :class="[isActiveLink('/articles')
+                  ? 'bg-pink-900'
+                  : 'hover:bg-gray-900 hover:text-white',
+                  'text-white',
+                  'px-3',
+                  'py-2',
+                  'rounded-md'
+                  ]"
+                  >Articles</RouterLink>
+
                 <RouterLink 
                   v-if="!user"
                   to="/login"

@@ -32,18 +32,18 @@ const toggleFullLines = () => {
 
 <template>
   <!-- Box -->
-  <div class="bg-indigo-200 rounded-xl shadow-md relative">
-    <div class="p-4">
+  <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+    <div class="p-6">
       <div class="mb-6">
-        <div class="my-2">{{ plan.carrier }}</div>
-        <h3 class="text-2xl text-pink-400 font-bold">
+        <div class="text-gray-500 text-sm uppercase tracking-wide">{{ plan.carrier }}</div>
+        <h3 class="text-2xl text-indigo-600 font-bold">
           <a :href="`/plan/${plan.id}`">{{ plan.name }}</a>
         </h3>
       </div>
       <!-- Show the description of the plan -->
-      <div class="mb-3">
-        <div>{{ truncatedDescription }}</div>
-        <button @click="toggleFullDescription" class="text-pink-500 hover:text-pink-600 mb-5">
+      <div class="mb-4">
+        <p class="text-gray-700">{{ truncatedDescription }}</p>
+        <button @click="toggleFullDescription" class="text-indigo-500 hover:text-indigo-600 mt-2">
           {{ showFullDescription ? 'Less' : 'More' }}
         </button>
       </div>
@@ -52,37 +52,36 @@ const toggleFullLines = () => {
         <table class="w-full text-left border-collapse">
           <thead>
             <tr>
-              <th class="border-b p-2">Lines</th>
-              <th class="border-b p-2">Price</th>
+              <th class="border-b p-2 text-gray-600">Lines</th>
+              <th class="border-b p-2 text-gray-600">Price</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="([line, price], i) in truncatedLineEntries" :key="i">
-              <td class="border-b p-2">{{ line }}</td>
-              <td class="border-b p-2">{{ price }}</td>
+              <td class="border-b p-2 text-gray-700">{{ line }}</td>
+              <td class="border-b p-2 text-gray-700">{{ price }}</td>
             </tr>
           </tbody>
         </table>
-        <button @click="toggleFullLines" class="text-pink-500 hover:text-pink-600 mt-2">
+        <button @click="toggleFullLines" class="text-indigo-500 hover:text-indigo-600 mt-2">
           {{ showFullLines ? 'Fewer lines' : 'More lines' }}
         </button>
       </div>
       <!-- Show the rest of the plan details -->
-       <!-- API returns 10000 as representation -->
       <div class="mb-2">
-        <strong>Data:</strong> {{ plan.data === 10000 ? 'Unlimited' : plan.data + ' GB' }}
+        <strong class="text-gray-600">Data:</strong> {{ plan.data === 10000 ? 'Unlimited' : plan.data + ' GB' }}
       </div>
       <div class="mb-2">
-        <strong>Hotspot:</strong> {{ plan.hotspot === 10000 ? 'Unlimited' : plan.hotspot + ' GB' }}
+        <strong class="text-gray-600">Hotspot:</strong> {{ plan.hotspot === 10000 ? 'Unlimited' : plan.hotspot + ' GB' }}
       </div>
       <div class="mb-2">
-        <strong>Talk:</strong> {{ plan.talk === 10000 ? 'Unlimited' : plan.talk + ' minutes' }}
+        <strong class="text-gray-600">Talk:</strong> {{ plan.talk === 10000 ? 'Unlimited' : plan.talk + ' minutes' }}
       </div>
       <div class="mb-2">
-        <strong>Text:</strong> {{ plan.text === 10000 ? 'Unlimited' : plan.text + ' messages' }}
+        <strong class="text-gray-600">Text:</strong> {{ plan.text === 10000 ? 'Unlimited' : plan.text + ' messages' }}
       </div>
       <div class="mb-4">
-        <strong>Payoff:</strong> {{ plan.payoff ? 'Yes' : 'No' }}
+        <strong class="text-gray-600">Payoff:</strong> {{ plan.payoff ? 'Yes' : 'No' }}
       </div>
     </div>
   </div>

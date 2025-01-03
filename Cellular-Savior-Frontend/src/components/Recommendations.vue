@@ -1,12 +1,14 @@
 <script setup>
 import Plan from './Plan.vue';
-import { defineProps, onMounted, reactive } from 'vue';
+import { defineProps, onMounted, reactive, computed } from 'vue';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import axios from 'axios'
 
 const state = reactive({
     plans: [],
     isLoading: true,
+    currentPage: 1,
+    itemsPerPage: 4,
 });
 
 console.log(state.plans);
@@ -19,6 +21,21 @@ defineProps({
     }
 });
 
+const totalPages = computed(() => {
+    return Math.ceil(state.plans.length / state.itemsPerPage);
+});
+
+const paginatedPlans = computed(() => {
+    const start = (state.currentPage - 1) * state.itemsPerPage;
+    const end = start + state.itemsPerPage;
+    return state.plans.slice(start, end);
+});
+
+const changePage = (page) => {
+    if (page >= 1 && page <= totalPages.value) {
+        state.currentPage = page;
+    }
+};
 
 onMounted(async () => {
     try {
@@ -48,11 +65,22 @@ onMounted(async () => {
                 <PulseLoader />
             </div>
             <!-- Show Plans when done loading-->
-            <div v-else class="grid grid-cols-1 md:grid-cols-3 gap6">
+            <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Plan 
-                v-for="plan in state.plans.slice(0, limit || state.plans.length)" 
+                v-for="plan in paginatedPlans" 
                 :key="plan.id" 
                 :plan="plan" />
+            </div>
+            <!-- Pagination Controls -->
+            <div v-if="totalPages > 1" class="flex justify-center mt-6">
+                <button 
+                    v-for="page in totalPages" 
+                    :key="page" 
+                    @click="changePage(page)" 
+                    :class="{'bg-indigo-500 text-white': page === state.currentPage, 'bg-white text-indigo-500': page !== state.currentPage}" 
+                    class="px-4 py-2 mx-1 border rounded">
+                    {{ page }}
+                </button>
             </div>
         </div>
     </section>
