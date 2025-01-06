@@ -1,8 +1,8 @@
 <script setup>
-import Article from '@/components/Article.vue'
+import KeepSwitchSwitch from '@/articles/KeepSwitchSwitch.vue'
 
 </script>
 
 <template>
-<Article />
+    <KeepSwitchSwitch />
 </template>

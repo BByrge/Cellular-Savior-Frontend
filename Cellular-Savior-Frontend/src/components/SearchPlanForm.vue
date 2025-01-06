@@ -3,7 +3,6 @@
 <script setup>
 import { useToast } from 'vue-toastification';
 import { reactive } from 'vue';
-import axios from 'axios';
 
 const toast = useToast();
 const MNOs = ['Verizon', 'T-Mobile', 'AT&T', 'USCellular', 'Boost Mobile'];
@@ -45,19 +44,7 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-    <section class="bg-purple-50">
-
-        <!-- This is a banner for catching attention and linking to products/articles/etc -->
-            <div class="bg-purple-50 text-center py-4 lg:px-4">
-                <div class="p-2 bg-indigo-900 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
-                    <span class="flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3">New</span>
-                    <span class="font-semibold mr-2 text-left flex-auto">
-                        Still owe money on your phone? We’ll guide you on how to get it paid off—up to $800, at no cost to you! Learn more: <a href="https://www.t-mobile.com/support/new-to-tmobile/keep-and-switch" class="underline">Keep and Switch and Switch</a>
-                    </span>
-                    <svg class="fill-current opacity-75 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/></svg>
-                </div>
-            </div>
-
+    <section class="bg-indigo-100">
         <div class="container m-auto max-w-2xl py-14">
             <div class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
                 <form @submit.prevent="handleSubmit">
@@ -76,52 +63,52 @@ const handleSubmit = async () => {
                     <!-- Data -->
                     <div class="mb-4">
                         <label for="data" class="block text-gray-700 font-bold mb-2">Data</label>
-                        <select v-model="form.data" id="data" name="data" class="border rounded w-full py-2 px-3 hover:outline hover:outline-1">
-                            <option value="0">0</option>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="50">50</option>
-                            <option value="10000">Unlimited</option>
+                        <select v-model.number="form.data" id="data" name="data" class="border rounded w-full py-2 px-3 hover:outline hover:outline-1">
+                            <option :value="0">0</option>
+                            <option :value="5">5</option>
+                            <option :value="10">10</option>
+                            <option :value="20">20</option>
+                            <option :value="50">50</option>
+                            <option :value="10000">Unlimited</option>
                         </select>
                     </div>
 
                     <!-- Hotspot -->
                     <div class="mb-4">
                         <label for="hotspot" class="block text-gray-700 font-bold mb-2">Hotspot</label>
-                        <select v-model="form.hotspot" id="hotspot" name="hotspot" class="border rounded w-full py-2 px-3 hover:outline hover:outline-1">
-                            <option value="0">0</option>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="50">50</option>
-                            <option value="10000">Unlimited</option>
+                        <select v-model.number="form.hotspot" id="hotspot" name="hotspot" class="border rounded w-full py-2 px-3 hover:outline hover:outline-1">
+                            <option :value="0">0</option>
+                            <option :value="5">5</option>
+                            <option :value="10">10</option>
+                            <option :value="20">20</option>
+                            <option :value="50">50</option>
+                            <option :value="10000">Unlimited</option>
                         </select>
                     </div>
 
                     <!-- Talk -->
                     <div class="mb-4">
                         <label for="talk" class="block text-gray-700 font-bold mb-2">Talk</label>
-                        <select v-model="form.talk" id="talk" name="talk" class="border rounded w-full py-2 px-3 hover:outline hover:outline-1">
-                            <option value="0">0</option>
-                            <option value="50">50</option>
-                            <option value="200">200</option>
-                            <option value="500">500</option>
-                            <option value="1000">1000</option>
-                            <option value="10000">Unlimited</option>
+                        <select v-model.number="form.talk" id="talk" name="talk" class="border rounded w-full py-2 px-3 hover:outline hover:outline-1">
+                            <option :value="0">0</option>
+                            <option :value="50">50</option>
+                            <option :value="200">200</option>
+                            <option :value="500">500</option>
+                            <option :value="1000">1000</option>
+                            <option :value="10000">Unlimited</option>
                         </select>
                     </div>
 
                     <!-- Text -->
                     <div class="mb-4">
                         <label for="text" class="block text-gray-700 font-bold mb-2">Text</label>
-                        <select v-model="form.text" id="text" name="text" class="border rounded w-full py-2 px-3 hover:outline hover:outline-1 ">
-                            <option value="0">0</option>
-                            <option value="50">50</option>
-                            <option value="200">200</option>
-                            <option value="500">500</option>
-                            <option value="1000">1000</option>
-                            <option value="10000">Unlimited</option>
+                        <select v-model.number="form.text" id="text" name="text" class="border rounded w-full py-2 px-3 hover:outline hover:outline-1 ">
+                            <option :value="0">0</option>
+                            <option :value="50">50</option>
+                            <option :value="200">200</option>
+                            <option :value="500">500</option>
+                            <option :value="1000">1000</option>
+                            <option :value="10000">Unlimited</option>
                         </select>
                     </div>
 

@@ -4,9 +4,9 @@ import NotFoundView from '@/views/NotFoundView.vue';
 import PlansView from '@/views/PlansView.vue';
 import PlanView from '@/views/PlanView.vue';
 import axios from 'axios';
-import AdminView from '../views/AdminView.vue';
-import RecommendView from '../views/RecommendView.vue';
-import ArticlesView from '../views/ArticlesView.vue';
+import AdminView from '@/views/AdminView.vue';
+import RecommendView from '@/views/RecommendView.vue';
+import ArticlesView from '@/views/ArticlesView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

@@ -10,9 +10,9 @@ const toast = useToast();
 const form = reactive({
     carrier : '',
     name : '',
-    data : '10000',
-    talk : '10000',
-    text : '10000',
+    data : 10000,
+    talk : 10000,
+    text : 10000,
     hotspot : '0',
     // The key must be a string for json. The value is a string for consistency.
     price : '{"1": "0", "2": "0", "3": "0", "4": "0", "5": "0", "6": "0", "7": "0", "8": "0", "9": "0", "10": "0", "11": "0", "12": "0"}',
@@ -81,10 +81,10 @@ const handleSubmit = async () => {
         // Set form back to default values
         form.carrier = '';
         form.name = '';
-        form.data = '10000';
-        form.talk = '10000';
-        form.text = '10000';
-        form.hotspot = '0';
+        form.data = 10000;
+        form.talk = 10000;
+        form.text = 10000;
+        form.hotspot = 0;
         form.price = '{"1": "0", "2": "0", "3": "0", "4": "0", "5": "0", "6": "0", "7": "0", "8": "0", "9": "0", "10": "0", "11": "0", "12": "0"}';
         form.payoff_deal = false;
         form.mvno = false;
