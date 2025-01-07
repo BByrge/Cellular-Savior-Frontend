@@ -52,7 +52,7 @@ const router = createRouter({
         } else {
           // Proceed to login if the user is not logged in
           try {
-            let response = await axios.get('http://localhost:8080/api/auth/initiate');
+            let response = await axios.get('https://api.cellularsavior.com/auth/initiate');
             let url = response.data.url;
             window.location.href = url;
           } catch (error) {
@@ -91,7 +91,7 @@ const router = createRouter({
 
         try {
           // Send the code and state to the backend for token exchange
-          const response = await axios.post('http://localhost:8080/api/auth/callback', {
+          const response = await axios.post('https://api.cellularsavior.com/auth/callback', {
             code,
             state,
           });

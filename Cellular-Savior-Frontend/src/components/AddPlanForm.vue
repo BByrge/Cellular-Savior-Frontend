@@ -75,7 +75,7 @@ const handleSubmit = async () => {
             description: form.description,
             url: form.url,
         };
-        const response = await axios.post('/api/plans', data, config);
+        const response = await axios.post('https://api.cellularsavior.com/plans', data, config);
         const createdPlan = response.data;
         console.log('Created Plan', createdPlan);
         // Set form back to default values

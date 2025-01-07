@@ -16,7 +16,7 @@ const state = reactive({
 
 onMounted(async () => {
   try {
-    const response = await axios.get(`/api/plans/${planId}`);
+    const response = await axios.get(`https://api.cellularsavior.com/plans/${planId}`);
     state.plan = response.data;
   } catch (error) {
     console.error('Error fetching plan', error);

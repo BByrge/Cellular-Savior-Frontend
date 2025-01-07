@@ -1,0 +1,14 @@
+# .gcloudignore file for a Vue/Node app
+
+# Ignore node_modules directory
+node_modules/
+
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore environment variable files
+.env
+.env.local
+.env.*.local

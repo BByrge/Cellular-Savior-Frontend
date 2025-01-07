@@ -37,7 +37,7 @@ const changePage = (page) => {
 
 onMounted(async () => {
     try {
-        const response = await axios.get('/api/plans');
+        const response = await axios.get('https://api.cellularsavior.com/plans');
         state.plans = response.data;
     } catch (error) {
         console.error('Error fetching plans', error);

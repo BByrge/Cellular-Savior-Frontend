@@ -40,10 +40,9 @@ const changePage = (page) => {
 onMounted(async () => {
     try {
         let plan = JSON.parse(localStorage.getItem('plan'));
-        console.log(plan);
-        const response = await axios.post('/api/recommend', plan);
+
+        const response = await axios.post('https://api.cellularsavior.com/recommend', plan);
         state.plans = response.data.results;
-        console.log(state.plans);
     } catch (error) {
         console.error('Error fetching plans', error);
     } finally {

@@ -20,7 +20,7 @@ const isValidJWT = async (token) => {
     return false;
   }
   try {
-    const response = await axios.post('http://localhost:8080/api/auth/verifyjwt', {
+    const response = await axios.post('https://api.cellularsavior.com/auth/verifyjwt', {
       token,
     });
     return true;
